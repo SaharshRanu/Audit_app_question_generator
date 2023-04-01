@@ -104,7 +104,6 @@ function Question_form() {
     function requiredQuestion(i){
         var reqQuestion = [...questions];
         reqQuestion[i].required = ! reqQuestion[i].required
-
         console.log(reqQuestion[i].required + " " + i);
         setQuestions(reqQuestion);
     }
@@ -195,7 +194,7 @@ function Question_form() {
                                     <DragIndicatorIcon style={{transform:'rotate(-90deg)', color:"#DAE0E2", position:"relative", left:"300px"}} fontSize="small" />
                                 </div>
                 <div>
-                <Accordion expanded={ques.open} onChange={()=>{handleExpand(i)}} className={ques[i].open ? 'add border' : ""} >
+                <Accordion expanded={questions[i].open} onChange={()=>{handleExpand(i)}} className={questions[i].open ? 'add border' : ""} >
 
                     <AccordionSummary aria-controls="panel1a-content" id="panel1a-header" elevation={1} style={{width:'100%'}}>
                     {questions[i].open ? (
@@ -241,7 +240,7 @@ function Question_form() {
                             </div> 
                                 <CropOriginalIcon style={{color:"#5f6368"}}/>
                                 <IconButton aria-label='delete'>
-                                    <CloseIcon onChange={()=>{removeOption(i, j)}}/>
+                                    <CloseIcon onClick={()=>{removeOption(i, j)}}/>
                                 </IconButton>
                             </div>
                         ))}
@@ -263,7 +262,7 @@ function Question_form() {
                         ):''}
                         <div className='add_footer'>
                             <div className='add_question_bottom_left'>
-                                <Button size='small' style={{textTransform:'none', color:'#4285f4', fontSize:'13px', fontWeight:'600'}}>
+                                <Button size='small' style={{textTransform:'none', color:'#4285f4', fontSize:'13px', fontWeight:'600'}} onClick={() => {addAnswer(i)}}>
                                     <FcRightUp style={{border:'2px solid #4285f4', padding:'2px', marginRight:'8px'}}/>
                                     Answer Key
                                 </Button>
@@ -277,7 +276,7 @@ function Question_form() {
                                 <IconButton aria-label='delete' onClick={()=>{deleteQuestion(i)}}>
                                     <BsTrash />
                                 </IconButton>
-                                <span style={{color:"#5f6368", fontSize:'13px'}}>Required</span> <Switch name='checkedA' color='primary' onClick={()=>{requiredQuestion()}} checked={{open:true, required:false}}></Switch>
+                                <span style={{color:"#5f6368", fontSize:'13px'}}>Required</span> <Switch name='checkedA' color='primary' onClick={()=>{requiredQuestion(i)}} checked></Switch>
 
                                 <IconButton>
                                     <MoreVertIcon />
